@@ -1,6 +1,4 @@
-const fs = require('fs')
-
-const querystring = require('querystring');
+const querystring = require('querystring')
 
 const axios = require('axios')
 axios.defaults.withCredentials = true
@@ -10,7 +8,6 @@ const store = new Store()
 
 // 验证码模块
 const verifyCode = require('./verifyCode')
-
 
 exports.login = function (data, callback) {
 	// 不能为空
@@ -34,7 +31,7 @@ exports.login = function (data, callback) {
 				'User-Agent': "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_0) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0 Safari/605.1.15",
 				Cookie: store.get('session')
 			},
-			data: querystring.stringify(data),
+			data: Rsa.encryptedString(KEY, querystring.stringify(data)),
 		}).then(res => {
 			if (res.headers['set-cookie'] != undefined) {
 				store.set('signature', res.headers['set-cookie'][0].split(' ')[0])

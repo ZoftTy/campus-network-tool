@@ -1,0 +1,59 @@
+{
+    "manifest_version": 2,
+    "name": "校园网登录",
+    "version": "1.0.0",
+    "description": "简易的校园网登录插件",
+    "author": "ZoftTy <poledye@gmail.com>",
+    "icons": {
+        "16": "icons/icon.png",
+        "48": "icons/icon.png",
+        "128": "icons/icon.png"
+    },
+    "background": {
+        "scripts": [
+            "js/tesseract/tesseract.min.js",
+            "background.js"
+        ]
+    },
+    "browser_action": {
+        "default_icon": {
+            "16": "icons/icon.png",
+            "32": "icons/icon.png",
+            "48": "icons/icon.png",
+            "128": "icons/icon.png"
+        }
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "http://125.88.59.131:10001/gz/index.jsp?*"
+            ],
+            "css": [
+                "/css/base.css"
+            ],
+            "run_at": "document_start"
+        },
+        {
+            "matches": [
+                "http://125.88.59.131:10001/gz/index.jsp?*"
+            ],
+            "js": [
+                "/js/main.js"
+            ],
+            "run_at": "document_end"
+        }
+    ],
+    "permissions": [
+        "tabs",
+        "storage",
+        "http://125.88.59.131:10001/*",
+        "webRequest",
+        "webRequestBlocking",
+        "declarativeContent"
+    ],
+    "web_accessible_resources": [
+        "lang-data/*",
+        "css/*"
+    ],
+    "homepage_url": "https://ty.zoft.work"
+}

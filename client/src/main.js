@@ -1,7 +1,7 @@
 // Modules to control application life and create native browser window
 const { app, BrowserWindow, ipcMain, Menu, MenuItem, Tray, nativeImage } = require('electron')
 const os = require('os')
-const path = require('path');
+const path = require('path')
 const Store = require('electron-store')
 
 // 自动更新
@@ -10,7 +10,7 @@ const { autoUpdater } = require("electron-updater")
 // 自定义网络设备模块
 const device = require('./modules/device')
 // 自定义登录模块
-const login = require('./modules/login');
+const login = require('./modules/login')
 // 自定义通知模块
 const Notice = require('./modules/notice')
 
@@ -31,6 +31,7 @@ function check_mode(username, password) {
     wlanacip: '219.135.165.26',
     username,
     password: null,
+    rand: '',
     code: '0'
   }
   // 判断密码是否为空，为空不加密
@@ -175,6 +176,7 @@ function check_mode(username, password) {
     })
   }
 
+  app.dock.hide()
 }
 
 function reloadMenu(id, data) {
