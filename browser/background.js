@@ -32,3 +32,16 @@ chrome.runtime.onConnect.addListener(function (port) {
         port.postMessage({ code })
     })
 })
+
+// 重定向 css 文件
+chrome.webRequest.onBeforeRequest.addListener(() => {
+    return { redirectUrl: chrome.extension.getURL('css/base.css') }
+}, {
+    urls: [
+        'http://125.88.59.131:10001/gz/css/demo.css',
+        'http://125.88.59.131:10001/gz/css/mode5_dx.css',
+        'http://125.88.59.131:10001/gz/css/pop.css'
+    ]
+},
+    ["blocking"]
+)
