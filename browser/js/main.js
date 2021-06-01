@@ -34,17 +34,18 @@ port.onMessage.addListener(function (msg) {
   code.value = msg.code
 })
 
-// const cacheCode = document.querySelector('#changeCode')
-const cacheCode = document.querySelector('#image_code')
+let imageCode
 
-cacheCode.onclick = async () => {
+async function changeCode() {
   let img = await imgToBase64('http://125.88.59.131:10001/common/image_code.jsp')
-  cacheCode.src = img
+  imageCode.setAttribute('src', img)
   port.postMessage(img)
 }
 
 window.onload = async () => {
-  let img = await imgToBase64('http://125.88.59.131:10001/common/image_code.jsp')
-  cacheCode.src = img
-  port.postMessage(img)
+  imageCode = document.querySelector('#image_code')
+
+  imageCode.onclick = changeCode
+
+  await changeCode()
 }

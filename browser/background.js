@@ -5,7 +5,7 @@ const worker = createWorker({
     workerPath: chrome.extension.getURL('js/tesseract/worker.min.js'),
     langPath: chrome.extension.getURL('lang-data'),
     corePath: chrome.extension.getURL('js/tesseract/tesseract-core.wasm.js'),
-    logger: m => console.log(m),
+    logger: m => console.log(m)
 });
 
 // 初始化 ocr
@@ -33,15 +33,9 @@ chrome.runtime.onConnect.addListener(function (port) {
     })
 })
 
-// 重定向 css 文件
+const host = 'http://125.88.59.131:10001'
+
+// 重定向js文件
 chrome.webRequest.onBeforeRequest.addListener(() => {
-    return { redirectUrl: chrome.extension.getURL('css/base.css') }
-}, {
-    urls: [
-        'http://125.88.59.131:10001/gz/css/demo.css',
-        'http://125.88.59.131:10001/gz/css/mode5_dx.css',
-        'http://125.88.59.131:10001/gz/css/pop.css'
-    ]
-},
-    ["blocking"]
-)
+    return { redirectUrl: chrome.extension.getURL('js/login.js') }
+}, { urls: [`${host}/js/login.js?version=2017`] }, ["blocking"])

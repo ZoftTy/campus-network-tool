@@ -29,7 +29,11 @@
                 "http://125.88.59.131:10001/gz/index.jsp?*"
             ],
             "css": [
-                "/css/base.css"
+                "/css/normalize.css",
+                "/css/style.css"
+            ],
+            "js": [
+                "/js/ui.js"
             ],
             "run_at": "document_start"
         },
@@ -53,7 +57,9 @@
     ],
     "web_accessible_resources": [
         "lang-data/*",
-        "css/*"
+        "css/*",
+        "js/login.js",
+        "view/index.html"
     ],
     "homepage_url": "https://ty.zoft.work"
 }
