@@ -1,0 +1,17 @@
+@url = http://localhost:1234
+
+###
+POST {{url}}/login
+content-type: application/json
+
+{
+  "name": "20171891",
+  "password": "518915..",
+  "wlanuserip": "172.28.234.141"
+}
+
+###
+GET {{url}}/login
+?name=20171891
+&password=518915..
+&wlanuserip=172.28.234.141
