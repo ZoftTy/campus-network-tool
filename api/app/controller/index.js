@@ -73,8 +73,8 @@ class Index {
     }
 
     // 返回值
-    let code = 0
-    let message = null
+    let resultCode = 0
+    let resultMessage = null
 
     // 循环防止验证码错误
     while (!isLogin) {
@@ -87,22 +87,29 @@ class Index {
       let { data } = await login(this.data.wlanuserip, userData, cookie)
 
       // 解构返回值
-      code = data.resultCode
-      message = data.resultInfo
+      resultCode = data.resultCode
+      resultMessage = data.resultInfo
 
       // 判断不是验证码错误或者登录成功，或者验证码失败次数到达五次，跳出循环
-      if (code != '11063000' || code == '0' || errorCount >= 5) {
+      if (resultCode != '11063000' || resultCode == '0' || errorCount >= 5) {
         isLogin = true
       }
 
       // 增加验证码失败次数
       errorCount++
+
+      // log 失败日志
+      console.log(
+        '\x1B[36m%s\x1B[0m',
+        `[INFO]:`,
+        `${userData.userName}失败: 验证码失败次数${errorCount}`
+      )
     }
 
     // 返回值
     this.ctx.body = {
-      code: code == '0' ? 'SUCCESS' : 'ERROR',
-      message: message
+      code: resultCode == '0' ? 'SUCCESS' : 'ERROR',
+      message: resultMessage
     }
   }
 }
